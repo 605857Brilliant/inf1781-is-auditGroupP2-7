@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A practical information systems audit for higher education managers, administrators and IT teams.">
+    <title>Unifying Student Data | Higher Education IS Audit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="Unifying Student Data, home">
+                <span class="brand-mark" aria-hidden="true">IS</span>
+                <span>Higher Education <span class="brand-light">| IS Audit</span></span>
+            </a>
+            <p class="header-note">A practical briefing for university leaders</p>
+        </div>
+    </header>
+
+    <nav class="site-nav" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="#integration">Integration</a>
+            <a href="#customisation">Customisation</a>
+            <a href="#data-management">Data management</a>
+            <a href="#ethics">Ethics &amp; POPIA</a>
+            <a href="#ai">AI &amp; decisions</a>
+            <a href="#review">Review &amp; AI use</a>
+            <a class="nav-reference" href="references.html">References <span aria-hidden="true">&nearr;</span></a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <section class="hero" aria-labelledby="page-title">
+            <div class="hero-copy">
+                <p class="eyebrow">INFORMATION SYSTEMS CONSULTANT'S BRIEFING</p>
+                <h1 id="page-title">Unifying student data</h1>
+                <p class="hero-lead">A practical guide to connecting student, learning and finance systems while protecting the people behind the data.</p>
+                <a class="button-link" href="#integration">Explore the audit <span aria-hidden="true">&darr;</span></a>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+                <span class="orbit orbit-one"></span>
+                <span class="orbit orbit-two"></span>
+                <span class="orbit orbit-three"></span>
+                <span class="orbit-core">STUDENT<br>JOURNEY</span>
+                <span class="orbit-label label-one">LEARNING</span>
+                <span class="orbit-label label-two">FINANCE</span>
+                <span class="orbit-label label-three">RECORDS</span>
+            </div>
+        </section>
+
+        <section class="audit-summary" aria-labelledby="summary-title">
+            <div class="summary-heading">
+                <p class="section-kicker">EXECUTIVE SUMMARY</p>
+                <h2 id="summary-title">Make the student journey work as one service</h2>
+                <p>The project scenario describes disconnected student, learning and finance systems. When student registration has to be re-entered or reconciled manually, staff can face inconsistent records, late course access and an incomplete view of student needs.</p>
+            </div>
+            <div class="summary-recommendation">
+                <span>RECOMMENDED FIRST MOVE</span>
+                <strong>Pilot one verified module-registration flow</strong>
+                <p>Define the authoritative record and shared fields, connect the SMS to the LMS through a managed interface, confirm delivery and exceptions, then extend to finance after the pilot is measured.</p>
+            </div>
+            <p class="scope-note"><strong>Scope:</strong> This is a scenario-based conceptual audit resource, not an assessment of a named institution or its actual systems. Confirm the current architecture, contracts, processes and baseline measures with institutional owners before procurement or implementation.</p>
+        </section>
+
+        <section class="section-card section-depth" id="integration">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">01 / IN-DEPTH AREA</p>
+                    <h2>Enterprise systems and integration</h2>
+                </div>
+                <span class="depth-badge">DEEP DIVE</span>
+            </div>
+            <p class="section-intro">The student management system (SMS), learning management system (LMS) and finance system each support a different part of the student journey. When they operate as disconnected silos, staff duplicate work, records drift out of sync and managers make decisions with an incomplete picture (Pearlson, Saunders and Galletta, 2024; Laudon and Laudon, 2022).</p>
+
+            <h3>Choose an integration pattern that fits</h3>
+            <p>An ESB is a candidate, not an automatic answer. The institution should select a pattern after checking vendor interfaces, message volumes, operational capability, security needs and long-term support costs. Avoid both a premature product decision and an uncontrolled mesh of one-off connections.</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th scope="col">Pattern</th><th scope="col">When it may fit</th><th scope="col">Trade-off to manage</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Point-to-point APIs</td><td>A small number of well-supported modern systems with limited, stable exchanges.</td><td>Quick to start, but each new connection adds dependencies, mappings and monitoring to maintain.</td></tr>
+                        <tr><td>Managed integration layer / ESB</td><td>Several systems need shared routing, format translation, policy enforcement or legacy adapters.</td><td>Centralises useful controls, but creates a service the institution must secure, operate and avoid turning into a bottleneck.</td></tr>
+                        <tr><td>Event-driven messaging</td><td>Downstream systems can process a change asynchronously and need reliable notification of updates.</td><td>Supports loose coupling, but requires event IDs, ordering/version rules, safe retries, monitoring and reconciliation; delivery may not be immediate.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>These patterns can coexist: vendor-supported APIs may connect a system to a managed integration service that publishes an enrolment event to downstream applications. The institution should test the simplest architecture that meets its reliability, privacy and support needs (Pearlson, Saunders and Galletta, 2024; Valacich and George, 2020).</p>
+
+            <h3>How a managed integration layer works</h3>
+            <p>When a managed integration layer is selected, systems exchange standardised messages through that layer instead of building and maintaining a separate connection for every pair of applications. It can route messages, translate formats and apply shared validation and security rules. It is an integration service, not a replacement for the systems or a single database that copies every record.</p>
+
+            <figure class="architecture">
+                <div class="architecture-panel architecture-current">
+                    <figcaption><span class="diagram-step">TODAY</span><strong>Disconnected systems</strong></figcaption>
+                    <div class="system-row">
+                        <div class="system-node"><span class="node-icon" aria-hidden="true">01</span><strong>Student management</strong><small>Registration record</small></div>
+                        <div class="system-node"><span class="node-icon" aria-hidden="true">02</span><strong>Learning platform</strong><small>Course access</small></div>
+                        <div class="system-node"><span class="node-icon" aria-hidden="true">03</span><strong>Finance system</strong><small>Student account</small></div>
+                    </div>
+                    <p class="diagram-caption">No dependable data flow; staff re-enter or reconcile information by hand.</p>
+                </div>
+                <div class="architecture-panel architecture-proposed">
+                    <figcaption><span class="diagram-step">PROPOSED</span><strong>Managed integration</strong></figcaption>
+                    <div class="flow-row">
+                        <div class="flow-node">Student<br>management</div>
+                        <span class="flow-arrow" aria-label="publishes event">&rarr;</span>
+                        <div class="flow-node flow-hub"><span>INTEGRATION LAYER</span><strong>ESB / APIs</strong><small>Validate · route · log</small></div>
+                        <span class="flow-arrow" aria-label="routes updates">&rarr;</span>
+                        <div class="flow-destinations">
+                            <div class="flow-node">Learning platform</div>
+                            <div class="flow-node">Finance system</div>
+                        </div>
+                    </div>
+                    <p class="diagram-caption">One verified registration event can update only the systems that need it.</p>
+                </div>
+                <p class="figure-note">Conceptual architecture: the institution should confirm its existing systems, interfaces and procurement constraints before selecting an integration product.</p>
+            </figure>
+
+            <h3>How a module-registration update can flow</h3>
+            <ol class="step-list">
+                <li><strong>Capture once.</strong> An authorised staff member confirms the student's identity and module selection in the SMS, the authoritative source for registration.</li>
+                <li><strong>Validate and publish.</strong> The SMS checks required fields and publishes a versioned registration event through a secure API or integration layer.</li>
+                <li><strong>Route only what is needed.</strong> The integration layer maps the message to agreed formats and sends the minimum required fields to the LMS and finance system.</li>
+                <li><strong>Confirm and reconcile.</strong> Each receiving system records the update and returns a status. Failed updates are logged, retried safely and assigned for resolution; staff can compare exceptions against the SMS.</li>
+            </ol>
+            <div class="callout">
+                <strong>Example:</strong> Once registration is approved, the LMS receives the student's institutional identifier and module enrolment so it can grant course access. The finance system receives the enrolment and relevant fee code so it can calculate the charge from its approved fee rules. A payment status should not silently overwrite academic registration.
+            </div>
+
+            <h3>Challenges and practical controls</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th scope="col">Challenge</th><th scope="col">Practical response</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Legacy software lacks modern interfaces</td><td>Assess vendor-supported APIs or a controlled adapter; isolate legacy-specific logic and avoid unsupported database changes (Baltzan, 2021).</td></tr>
+                        <tr><td>Different identifiers, formats or definitions</td><td>Agree a common student identifier, data dictionary, validation rules and named data owners before connecting systems.</td></tr>
+                        <tr><td>Duplicates, delayed messages or partial failure</td><td>Use unique event IDs, safe retries, exception queues, monitoring and regular reconciliation so a retry does not create a second enrolment or charge.</td></tr>
+                        <tr><td>Privacy and cyber-security exposure</td><td>Minimise fields shared, encrypt connections, restrict service accounts, keep audit logs and review access rights and supplier agreements.</td></tr>
+                        <tr><td>Downtime during registration or exams</td><td>Pilot one faculty or process, test peak loads and recovery, run parallel checks, and schedule cutover outside critical periods (Sommerville, 2019).</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>A phased implementation for the institution</h3>
+            <ol class="phase-list">
+                <li><span>1</span><div><strong>Discover</strong><p>Map the student journey, current applications, data owners, interfaces and high-risk manual hand-offs.</p></div></li>
+                <li><span>2</span><div><strong>Define</strong><p>Set shared definitions, authoritative sources, privacy requirements, service levels and exception ownership.</p></div></li>
+                <li><span>3</span><div><strong>Pilot</strong><p>Integrate one high-value, low-risk flow, such as approved module registration to LMS access, and test ordinary and failure scenarios.</p></div></li>
+                <li><span>4</span><div><strong>Scale and improve</strong><p>Reconcile outcomes, train staff, monitor failed messages and service availability, then extend integration in controlled phases.</p></div></li>
+            </ol>
+            <h3>Measure whether the pilot improved service</h3>
+            <p>Record a baseline before the pilot and agree thresholds with the system and process owners; the measures below are recommendations, not results or pre-set targets. Report the period and denominator consistently.</p>
+            <ul class="check-list">
+                <li><strong>Successful updates:</strong> share of approved registration events confirmed by each receiving system.</li>
+                <li><strong>Timeliness:</strong> median and high-percentile time from SMS approval to LMS confirmation, especially before teaching starts.</li>
+                <li><strong>Exceptions:</strong> number and age of unresolved events, grouped by cause and assigned owner.</li>
+                <li><strong>Data quality:</strong> duplicate or mismatched enrolments found in reconciliation, with repeat causes tracked.</li>
+                <li><strong>Service resilience:</strong> integration availability and recovery performance during peak registration and agreed recovery tests.</li>
+            </ul>
+            <p class="section-close">Integration succeeds when the institution also owns the data definitions, quality rules and exception process—not simply when an interface goes live (Valacich and George, 2020).</p>
+        </section>
+
+        <section class="section-card" id="customisation">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">02 / FIT FOR THE INSTITUTION</p>
+                    <h2>Adapting and customising systems</h2>
+                </div>
+            </div>
+            <p class="section-intro">A system should support the institution's real processes and the needs of its students and staff. The best fit is not necessarily the system with the most modifications: configuration and clear workflows are usually easier to maintain than changes to a vendor's core code.</p>
+            <div class="two-column">
+                <div>
+                    <h3>Start with needs, not features</h3>
+                    <p>Consult academic staff, administrators, finance teams, IT, disability support and students. Map tasks such as registration, module changes and account queries, then identify where delays, duplicate capture or unclear responsibility occur. Separate essential institutional or legal requirements from preferences.</p>
+                </div>
+                <div>
+                    <h3>Configure before custom code</h3>
+                    <p>Prefer supported settings, role-based dashboards, reports, workflow rules and APIs. Restrict custom code to requirements that cannot reasonably be met through configuration, and document the owner, testing, upgrade impact and support plan (Laudon and Laudon, 2022).</p>
+                </div>
+            </div>
+            <ul class="check-list">
+                <li>Use role-based views so staff see what they need for their work, not every student record.</li>
+                <li>Test changes with representative staff and accessible, real-world workflows before rollout.</li>
+                <li>Provide practical training, a support route and time for staff to adapt.</li>
+                <li>Review system changes periodically as policy, courses and student needs evolve.</li>
+            </ul>
+        </section>
+
+        <section class="section-card" id="data-management">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">03 / INFORMATION QUALITY</p>
+                    <h2>Data and information management</h2>
+                </div>
+            </div>
+            <p class="section-intro">Student information becomes useful to the institution when it is trustworthy, appropriately governed and available to the people who need it. Registration, teaching and finance teams each create or use part of a student's record; without shared definitions and clear responsibility, the same fact may be captured more than once and gradually disagree across systems (Laudon and Laudon, 2022; Pearlson, Saunders and Galletta, 2024).</p>
+
+            <h3>Manage data throughout its lifecycle</h3>
+            <p>For each important data item, define what it means, who owns its quality, which system is authoritative, who may access it and how long it should be kept. In this scenario, the student management system is the authoritative source for approved enrolment; the LMS records learning activity; and the finance system records fees and payments. Integration shares updates between systems but does not make each receiving system the authority for every fact.</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th scope="col">Quality dimension</th><th scope="col">University example</th><th scope="col">Useful check</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Accuracy</td><td>A student's name or programme matches verified institutional records.</td><td>Sample records against an authorised source; provide a correction route.</td></tr>
+                        <tr><td>Completeness</td><td>Required programme and module fields are present for active registrations.</td><td>Count records missing required fields and identify the responsible process.</td></tr>
+                        <tr><td>Consistency</td><td>Module codes and enrolment status have the same agreed meaning in the SMS and LMS.</td><td>Compare mapped values and report mismatches for reconciliation.</td></tr>
+                        <tr><td>Timeliness</td><td>An approved module change reaches the LMS before course access is needed.</td><td>Measure time between source approval and confirmed downstream update.</td></tr>
+                        <tr><td>Validity</td><td>A module code and enrolment date follow the institution's accepted formats and rules.</td><td>Validate against current reference lists and permitted ranges at capture.</td></tr>
+                        <tr><td>Uniqueness</td><td>A person has one institutional student identifier, not duplicate active profiles.</td><td>Check for duplicate identifiers and suspicious matches before merging records.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Quality is created at the point of work and maintained across the lifecycle—not fixed only after a dashboard exposes an error. Agree definitions and validation at capture, reconcile system-to-system updates, assign exceptions to an owner, and record approved corrections. Avoid automatically merging records based only on a similar name; mistaken matches can expose one student's information to another.</p>
+
+            <h3>Example management dashboard</h3>
+            <p>A management dashboard should connect indicators to a decision, show the reporting period and definitions, and permit appropriate investigation without displaying unnecessary personal details. The sample below is an <strong>illustrative mock-up only</strong>: every number is invented to demonstrate the design and is not institutional data or a research finding.</p>
+            <div class="dashboard" role="group" aria-label="Illustrative mock student-data quality dashboard. All figures shown are fictional examples, not real institutional data.">
+                <div class="dashboard-topline">
+                    <div><span class="dashboard-kicker">STUDENT DATA OPERATIONS</span><strong>Registration &amp; access overview</strong></div>
+                    <span class="sample-tag">FICTIONAL SAMPLE</span>
+                </div>
+                <p class="dashboard-period">Example reporting period: first four weeks of a hypothetical term</p>
+                <div class="metric-grid">
+                    <div class="metric-card"><span>Confirmed LMS access<br>within 1 working day</span><strong>91%</strong><small>Illustrative service measure</small></div>
+                    <div class="metric-card"><span>Median registration-to-access<br>time</span><strong>1.4 days</strong><small>Illustrative timeliness measure</small></div>
+                    <div class="metric-card"><span>Registrations awaiting<br>reconciliation</span><strong>34</strong><small>Illustrative exception count</small></div>
+                </div>
+                <div class="chart-heading"><strong>Example access confirmations by week</strong><span>Fictional counts</span></div>
+                <div class="bar-chart" role="img" aria-label="Illustrative fictional confirmations: Week 1, 420; Week 2, 360; Week 3, 290; Week 4, 240.">
+                    <div class="bar-row"><span>Week 1</span><div class="bar-track"><span style="width:100%"></span></div><strong>420</strong></div>
+                    <div class="bar-row"><span>Week 2</span><div class="bar-track"><span style="width:86%"></span></div><strong>360</strong></div>
+                    <div class="bar-row"><span>Week 3</span><div class="bar-track"><span style="width:69%"></span></div><strong>290</strong></div>
+                    <div class="bar-row"><span>Week 4</span><div class="bar-track"><span style="width:57%"></span></div><strong>240</strong></div>
+                </div>
+                <p class="dashboard-footnote">Mock figures for layout illustration only; not measured results, targets or institutional evidence.</p>
+            </div>
+            <p>In a real dashboard, define the denominator behind “within one working day” (for example, approved module registrations with a successful LMS confirmation divided by all eligible approved module registrations in the reporting period). Display unresolved updates alongside completed totals so a high volume cannot hide a queue of failures. A manager could investigate the 34 illustrative exceptions by faculty or cause using aggregated, access-controlled views, then assign an owner and track resolution. Suppress small groups where a displayed breakdown could identify an individual student.</p>
+
+            <h3>Governance that makes the numbers useful</h3>
+            <ul class="check-list">
+                <li><strong>Assign ownership:</strong> name a business data owner for each important domain and operational stewards who resolve quality issues.</li>
+                <li><strong>Use common definitions:</strong> maintain a data dictionary for student status, programme, module, fee code and reporting period.</li>
+                <li><strong>Control access and retention:</strong> grant role-appropriate access, protect exports and dashboards, and retain information only according to approved institutional rules and legal obligations.</li>
+                <li><strong>Track provenance:</strong> record when a field was captured or changed, its authoritative system and how it was transformed or shared.</li>
+                <li><strong>Improve the process:</strong> review trends and exceptions with the staff who create the data; correct the underlying workflow rather than repeatedly patching reports.</li>
+            </ul>
+        </section>
+
+        <section class="section-card" id="ethics">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">04 / COMPLIANCE &amp; TRUST</p>
+                    <h2>Data ethics, privacy and POPIA</h2>
+                </div>
+            </div>
+            <p class="section-intro">Student information is personal information, not merely an institutional asset. Registration, marks, contact details, financial records and support information can expose students to harm if collected excessively, used unexpectedly or accessed by the wrong person. A university should design its connected systems around lawful, fair and secure use of information (Republic of South Africa, 2013).</p>
+
+            <h3>Apply POPIA to the student journey</h3>
+            <p>The Protection of Personal Information Act 4 of 2013 (POPIA) sets conditions for responsible processing of personal information. The institution should identify its purpose and applicable lawful justification for each activity; consent is not the only possible justification, and a broad consent form is not a substitute for proper governance. The institution should also explain processing in an accessible privacy notice and provide channels for students to exercise their rights.</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th scope="col">POPIA principle</th><th scope="col">Higher-education practice</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Accountability</td><td>Assign an accountable information officer, system owners and data stewards; include privacy checks in system changes.</td></tr>
+                        <tr><td>Processing limitation</td><td>Collect only information that is adequate, relevant and not excessive for a defined university purpose; document the applicable lawful ground.</td></tr>
+                        <tr><td>Purpose specification</td><td>Tell students why information is collected—for example, module registration—and set a retention period linked to that purpose and applicable records duties.</td></tr>
+                        <tr><td>Further-processing limitation</td><td>Do not repurpose identifiable academic records for unrelated profiling or marketing without assessing compatibility and the legal requirements.</td></tr>
+                        <tr><td>Information quality</td><td>Let students request correction of inaccurate details and assign staff to resolve conflicting records across systems.</td></tr>
+                        <tr><td>Openness</td><td>Use clear notices to explain what is collected, who receives it, why it is needed and how to raise a query or complaint.</td></tr>
+                        <tr><td>Security safeguards</td><td>Apply least-privilege access, strong authentication, encryption, audit logs, secure backups and incident-response procedures.</td></tr>
+                        <tr><td>Data-subject participation</td><td>Provide a clear route for access and correction requests and respond through the institution's documented POPIA process.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Protect data across connected systems</h3>
+            <ul class="check-list">
+                <li><strong>Minimise transfers:</strong> the LMS needs module enrolment to grant access; it does not need a student's bank details. Finance needs billing information, not detailed learning activity.</li>
+                <li><strong>Control access:</strong> use staff roles, promptly remove access when duties change, and review privileged accounts and service integrations.</li>
+                <li><strong>Manage operators:</strong> assess cloud and software providers, document permitted processing and security expectations, and oversee cross-border arrangements where relevant.</li>
+                <li><strong>Respond to compromise:</strong> maintain a tested incident plan. POPIA section 22 requires notification to the Information Regulator and affected data subjects when there are reasonable grounds to believe personal information has been accessed or acquired by an unauthorised person.</li>
+                <li><strong>Reduce unfair effects:</strong> limit access to sensitive support records, provide a way to correct data, and do not treat a dashboard score as a complete account of a student's circumstances.</li>
+            </ul>
+            <div class="callout callout-caution">
+                <strong>Ethical check:</strong> Before linking datasets or introducing analytics, ask whether the use is necessary, proportionate, understandable to students and likely to create unfair disadvantage. Escalate uncertain legal questions to the institution's Information Officer or legal adviser.
+            </div>
+            <p class="source-note">This section is educational, not legal advice. POPIA requirements depend on the institution's role, purpose and facts of each processing activity.</p>
+        </section>
+
+        <section class="section-card" id="ai">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">05 / RESPONSIBLE DECISION SUPPORT</p>
+                    <h2>AI and decision support</h2>
+                </div>
+            </div>
+            <p class="section-intro">Decision-support systems help people turn information into options, comparisons or forecasts. Artificial intelligence (AI) may support some of these tasks, but a model's output is an estimate—not a fact, a policy decision or a substitute for professional judgement. The institution should first define the decision and the people affected, then choose the simplest method that can responsibly support it (Pearlson, Saunders and Galletta, 2024; NIST, 2023).</p>
+
+            <h3>Match analysis to the question</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th scope="col">Analysis level</th><th scope="col">Question</th><th scope="col">Higher-education example</th><th scope="col">Important limit</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Descriptive</td><td>What happened?</td><td>Summarise module registrations, pass rates or help-desk volumes by period.</td><td>A pattern describes recorded data; it does not explain its cause.</td></tr>
+                        <tr><td>Diagnostic</td><td>Why might it have happened?</td><td>Investigate whether LMS access delays cluster around a system change or a particular workflow.</td><td>Association is not proof of cause; validate with process knowledge.</td></tr>
+                        <tr><td>Predictive</td><td>What might happen?</td><td>Estimate which modules may need additional tutoring capacity using previous results and current, relevant indicators.</td><td>Predictions have uncertainty and may reproduce historic disadvantage or missing-data patterns.</td></tr>
+                        <tr><td>Prescriptive</td><td>What action could be considered?</td><td>Compare possible tutor allocation plans against demand, capacity and budget constraints.</td><td>Recommendations reflect chosen objectives and constraints; people must decide whether they are appropriate.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Descriptive reports and rules-based decision support may be sufficient for many administrative needs. Predictive or generative AI should not be introduced merely because it is available. First ask whether a less complex, more explainable process would answer the question with lower risk.</p>
+
+            <h3>Appropriate uses and decision boundaries</h3>
+            <div class="two-column">
+                <div>
+                    <h3>Support services and planning</h3>
+                    <p>Aggregated course-demand forecasts can help plan tutoring or timetable capacity. A carefully reviewed early-support indicator might invite an adviser to check in with a student who is experiencing difficulty and offer voluntary help. The indicator should be a prompt to ask, not a label that the student will fail.</p>
+                </div>
+                <div>
+                    <h3>Keep consequential decisions accountable</h3>
+                    <p>Do not use an unreviewed model score to deny admission, funding, registration or an appeal, or to impose an academic penalty. Publish the responsible human process, allow correction of relevant records, and provide a way to question or appeal a consequential decision.</p>
+                </div>
+            </div>
+            <h3>Risks and safeguards</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th scope="col">Risk</th><th scope="col">Safeguard</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Unequal or biased outcomes</td><td>Check data coverage and error rates across relevant student groups where lawful and appropriate; involve affected communities and investigate material differences before deployment.</td></tr>
+                        <tr><td>Incomplete or stale information</td><td>Show data sources and reporting dates, assess missingness, and pause use when upstream records or integrations are unreliable.</td></tr>
+                        <tr><td>False alarms or missed need</td><td>Evaluate false-positive and false-negative impacts; make support accessible to all students, not only those flagged by a model.</td></tr>
+                        <tr><td>Privacy and function creep</td><td>Define purpose and lawful processing, minimise inputs, restrict access and retention, and conduct a privacy assessment before linking personal datasets.</td></tr>
+                        <tr><td>Over-reliance on an opaque output</td><td>Explain factors and uncertainty in understandable terms, train staff, preserve meaningful human review and document the final decision and reasons.</td></tr>
+                        <tr><td>Performance changes over time</td><td>Monitor accuracy, data drift, complaints and outcomes after deployment; assign an owner and suspend the system if its agreed limits are exceeded.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>A responsible decision-support lifecycle</h3>
+            <ol class="step-list">
+                <li><strong>Define the decision.</strong> Specify the intended user, purpose, affected students, consequence and non-AI alternative.</li>
+                <li><strong>Check readiness and rights.</strong> Confirm source data quality, lawful purpose, proportionality, access controls and student-facing explanation.</li>
+                <li><strong>Test before use.</strong> Pilot on appropriate data, compare with a simple baseline, examine errors and subgroup effects, and obtain staff and student-support input.</li>
+                <li><strong>Keep people accountable.</strong> Train decision-makers to interpret uncertainty, provide a review and appeal path, and prohibit automation from silently making consequential decisions.</li>
+                <li><strong>Monitor and stop if needed.</strong> Review performance, incidents, complaints and changed conditions; document an owner and criteria for correction, suspension or retirement.</li>
+            </ol>
+            <div class="callout">
+                <strong>Generative AI reminder:</strong> Do not enter identifiable student records, marks, contact details or confidential institutional data into a public AI service. Generated summaries or recommendations can be incomplete or wrong; verify them against authorised records and approved policy before acting (UNESCO, 2023).
+            </div>
+            <p class="source-note">The NIST AI Risk Management Framework groups risk work into Govern, Map, Measure and Manage. It is a voluntary risk-management resource, not South African law (NIST, 2023).</p>
+        </section>
+
+        <section class="section-card" id="review">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">06 / SCOPE &amp; TRANSPARENCY</p>
+                    <h2>Limitations, review and AI disclosure</h2>
+                </div>
+            </div>
+            <p class="section-intro">This resource applies information-systems concepts to a hypothetical higher-education scenario. It is intended to support discussion and planning, not to certify the systems, controls or legal compliance of a particular institution.</p>
+            <ul class="check-list">
+                <li><strong>Confirm local facts:</strong> validate the institution's current systems, supplier interfaces, data definitions, operating processes, legal obligations and baseline performance before making implementation decisions.</li>
+                <li><strong>Interpret examples carefully:</strong> the proposed architecture is one possible design, not a confirmed solution; all dashboard figures are fictional and must not be cited as institutional evidence or measured outcomes.</li>
+                <li><strong>Review over time:</strong> involve system owners, data stewards, staff, student-support teams and relevant privacy or legal advisers. Update the resource when systems, risks, policies or requirements change.</li>
+            </ul>
+            <h3>AI use disclosure</h3>
+            <p>AI tools supported drafting and editing, content organisation, and aspects of the HTML/CSS layout, conceptual architecture illustration and fictional dashboard. The group reviewed and adapted the material for the scenario; AI-generated claims and sources were not treated as automatically accurate. The group remains responsible for the final content and should be able to explain and defend the recommendations.</p>
+            <p class="source-note">This disclosure describes the assistance used in preparing the project. It does not imply that a real university system was tested or that the proposed design has been implemented.</p>
+        </section>
+
+        <section class="next-steps" aria-labelledby="next-steps-title">
+            <p class="section-kicker">CONSULTANT'S RECOMMENDATION</p>
+            <h2 id="next-steps-title">Start with trustworthy foundations</h2>
+            <ul>
+                <li>Assign owners and shared definitions for the student data that moves between the SMS, LMS and finance system.</li>
+                <li>Pilot and monitor one high-value registration integration before expanding to more processes.</li>
+                <li>Assess privacy, data quality and human oversight before using linked student information to support decisions.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Higher Education IS Audit <span aria-hidden="true">|</span> Student information systems, integrated responsibly.</p>
+        <a href="references.html">View sources and references <span aria-hidden="true">&rarr;</span></a>
+    </footer>
+</body>
+</html>
